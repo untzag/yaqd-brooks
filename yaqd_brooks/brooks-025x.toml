@@ -1,0 +1,61 @@
+protocol = "brooks-025x"
+doc = ""
+traits = ["has-transformed-position", "has-limits", "has-position", "uses-uart", "uses-serial", "is-daemon"]
+hardware = ["brooks:0250", "brooks:0254"]
+
+[links]
+source = "https://github.com/yaq-project/yaqd-brooks"
+bugtracker = "https://github.com/yaq-project/yaqd-brooks/-/issues"
+
+[installation]
+PyPI = "https://pypi.org/project/yaqd-brooks"
+
+[[types]]
+type = "record"
+name = "calibration_point"
+fields = [{"name"="setpoint", "type"="double"},
+          {"name"="measured", "type"="double"}]
+
+[config]
+
+[config.address]
+doc = "Address within RS-232 network. Leave zero for non-networked mode."
+type = "int"
+default = 0
+
+[config.port]
+doc = "Physical port used for MFC."
+type = "int"
+
+[config.stop_bits]
+type = {"type"="enum", "name"="stop_bits", "symbols"=["one", "one_and_half", "two"]}
+doc = "Number of stop bits."
+default = "one"
+
+[config.parity]
+type = {"type"="enum", "name"="parity", "symbols"=["O"]}
+doc = "Serial parity."
+default = "O"
+
+[config.calibration]
+type = {"type"="array", "items"="calibration_point"}
+doc = "Array of calibration points for MFC, in units."
+default = [{"setpoint"=0.0, "measured"=0.0}, {"setpoint"=1000000.0, "measured"=1000000.0}]
+
+[messages]
+
+[messages.get_rate]
+doc = "Get current flow rate, in units specified within the config"
+response = "double"
+
+[messages.set_rate]
+doc = "Set current flow rate, in units specified within the config"
+request = [{"name"="rate", "type"="double"}]
+
+[fields]
+
+[fields.rate]
+type = "double"
+getter = "get_rate"
+setter = "set_rate"
+kind = "normal"
