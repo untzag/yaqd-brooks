@@ -1,7 +1,8 @@
 {
     "config": {
         "address": {
-            "doc": "brooks-mfc-address within RS-232 network",
+            "default": 0,
+            "doc": "Address within RS-232 network. Leave zero for non-networked mode.",
             "type": "int"
         },
         "baud_rate": {
@@ -116,7 +117,7 @@
             }
         },
         "port": {
-            "doc": "TCP port for daemon to occupy.",
+            "doc": "Physical port used for MFC.",
             "origin": "is-daemon",
             "type": "int"
         },

@@ -15,7 +15,7 @@ from yaqd_core import (
     UsesSerial,
     UsesUart,
     IsDaemon,
-    aserial
+    aserial,
 )
 
 
