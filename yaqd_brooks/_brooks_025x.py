@@ -20,11 +20,10 @@ from yaqd_core import (
 )
 
 
-parameters = {"SP Rate": 1,
-              "SP Full Scale": 9}
+parameters = {"SP Rate": 1, "SP Full Scale": 9}
 
 
-def construct_write(address:int, port:int, parameter:int, value:float) -> bytes:
+def construct_write(address: int, port: int, parameter: int, value: float) -> bytes:
     command = "AZ"
     if address:
         command += f"{address:05}"
@@ -32,7 +31,7 @@ def construct_write(address:int, port:int, parameter:int, value:float) -> bytes:
     return command.encode()
 
 
-def construct_query(address:int, port:int, parameter:int) -> bytes:
+def construct_query(address: int, port: int, parameter: int) -> bytes:
     command = "AZ"
     if address:
         command += f"{address:05}"
@@ -52,22 +51,21 @@ class Response:
     checksum_valid: bool
 
 
-def parse_response(raw:bytes) -> Response:
+def parse_response(raw: bytes) -> Response:
     string = raw.encode().strip()
     predelimiter, addport, response_type, parameter, value, checksum = string.split(",")
     address, port = addport.split(".")
     # TODO CHECKSUM
-    return Response(predelimiter = predelimter,
-                    address = int(address),
-                    port = int(port),
-                    response_type = int(response_type),
-                    parameter = int(parameter[1:]),
-                    value = float(value),
-                    checksum = checksum.decode(),
-                    checksum_valid = True)
-
-
-
+    return Response(
+        predelimiter=predelimter,
+        address=int(address),
+        port=int(port),
+        response_type=int(response_type),
+        parameter=int(parameter[1:]),
+        value=float(value),
+        checksum=checksum.decode(),
+        checksum_valid=True,
+    )
 
 
 class Brooks025x(HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesSerial, IsDaemon):
@@ -75,11 +73,12 @@ class Brooks025x(HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesS
 
     def __init__(self, name, config, config_filepath):
         super().__init__(name, config, config_filepath)
-        self._ser = aserial.get_aserial(config["serial_port"],  # magically ensures single instance per port
-                                        baudrate=config["baud_rate"],
-                                        parity=config["parity"],
-                                        stop_bits=config["stop_bits"],
-                                        )
+        self._ser = aserial.get_aserial(
+            config["serial_port"],  # magically ensures single instance per port
+            baudrate=config["baud_rate"],
+            parity=config["parity"],
+            stop_bits=config["stop_bits"],
+        )
         self._units = "ml/min"
         self._native_units = "ml/min"
 
@@ -100,10 +99,9 @@ class Brooks025x(HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesS
         return out
 
     def _set_position(self, position):
-        command = construct_write(self._config["address"],
-                                  self._config["port"],
-                                  parameters["SP Rate"],
-                                  position)
+        command = construct_write(
+            self._config["address"], self._config["port"], parameters["SP Rate"], position
+        )
         response = self._ser.awrite_then_readline(command)
 
     def _transformed_to_relative(self, transformed_position):
@@ -113,9 +111,9 @@ class Brooks025x(HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesS
 
     async def update_state(self):
         while True:
-            command = construct_query(self._config["address"],
-                                      self._config["port"],
-                                      parameters["SP Rate"])
+            command = construct_query(
+                self._config["address"], self._config["port"], parameters["SP Rate"]
+            )
             raw = self._ser.awrite_then_readline(command)
             response = parse_response(raw)
             if response.parameter == parameters["SP Rate"]:
