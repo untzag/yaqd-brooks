@@ -51,3 +51,6 @@ coverage.xml
 
 # vim
 *.sw?
+# pixi environments
+.pixi/*
+!.pixi/config.toml
