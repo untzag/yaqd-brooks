@@ -20,7 +20,7 @@ from yaqd_core import (
 )
 
 
-parameters = {"SP Rate": 1
+parameters = {"SP Rate": 1,
               "SP Full Scale": 9}
 
 
@@ -62,8 +62,8 @@ def parse_response(raw:bytes) -> Response:
                     port = int(port),
                     response_type = int(response_type),
                     parameter = int(parameter[1:]),
-                    value = float(value)
-                    checksum = checksum.decode()
+                    value = float(value),
+                    checksum = checksum.decode(),
                     checksum_valid = True)
 
 
