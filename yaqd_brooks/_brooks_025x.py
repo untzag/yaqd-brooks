@@ -52,18 +52,18 @@ class Response:
 
 
 def parse_response(raw: bytes) -> Response:
-    string = raw.encode().strip()
+    string = raw.decode().strip()
     predelimiter, addport, response_type, parameter, value, checksum = string.split(",")
     address, port = addport.split(".")
     # TODO CHECKSUM
     return Response(
-        predelimiter=predelimter,
+        predelimiter=predelimiter,
         address=int(address),
         port=int(port),
         response_type=int(response_type),
         parameter=int(parameter[1:]),
         value=float(value),
-        checksum=checksum.decode(),
+        checksum=checksum.encode(),
         checksum_valid=True,
     )
 
