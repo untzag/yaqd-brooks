@@ -20,8 +20,8 @@ from yaqd_core import (
 )
 
 
-dict parameters = {"SP Rate": 1
-                   "SP Full Scale": 9}
+parameters = {"SP Rate": 1
+              "SP Full Scale": 9}
 
 
 def construct_write(address:int, port:int, parameter:int, value:float) -> bytes:
