@@ -33,7 +33,7 @@ dev = ["black", "pre-commit"]
 
 [tool.flit.scripts]
 yaqd-brooks-mfc-gf = "yaqd_brooks._brooks_mfc_gf:BrooksMfcGf.main"
-
+yaqd-brooks-mfc-025x = "yaqd_brooks._brooks_mfc_025x:BrooksMfc025x.main"
 
 [tool.black]
 line-length = 99

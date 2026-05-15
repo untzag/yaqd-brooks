@@ -444,7 +444,7 @@
             "units_getter": "get_units"
         }
     },
-    "protocol": "brooks-025x",
+    "protocol": "brooks-mfc-025x",
     "requires": [],
     "state": {
         "destination": {

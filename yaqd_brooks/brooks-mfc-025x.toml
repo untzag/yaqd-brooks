@@ -1,4 +1,4 @@
-protocol = "brooks-025x"
+protocol = "brooks-mfc-025x"
 doc = ""
 traits = ["has-transformed-position", "has-limits", "has-position", "uses-uart", "uses-serial", "is-daemon"]
 hardware = ["brooks:0250", "brooks:0254"]

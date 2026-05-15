@@ -1,4 +1,4 @@
-__all__ = ["BrooksMfcGf"]
+__all__ = ["BrooksMfc025x"]
 
 
 import asyncio
@@ -68,8 +68,8 @@ def parse_response(raw: bytes) -> Response:
     )
 
 
-class Brooks025x(HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesSerial, IsDaemon):
-    _kind = "brooks-025x"
+class BrooksMfc025x(HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesSerial, IsDaemon):
+    _kind = "brooks-mfc-025x"
 
     def __init__(self, name, config, config_filepath):
         super().__init__(name, config, config_filepath)
