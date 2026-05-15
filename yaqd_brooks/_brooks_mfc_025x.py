@@ -67,7 +67,9 @@ def parse_response(raw: bytes) -> Response:
     )
 
 
-class BrooksMfc025x(HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesSerial, IsDaemon):
+class BrooksMfc025x(
+    HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesSerial, IsDaemon
+):
     _kind = "brooks-mfc-025x"
 
     def __init__(self, name, config, config_filepath):
