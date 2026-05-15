@@ -83,7 +83,7 @@ class BrooksMfc025x(
             config["serial_port"],  # magically ensures single instance per port
             baudrate=config["baud_rate"],
             parity=parity_options[config["parity"]],
-            stop_bits=stop_bit_options[config["stop_bits"]],
+            stopbits=stop_bit_options[config["stop_bits"]],
         )
         self._units = "ml/min"
         self._native_units = "ml/min"
