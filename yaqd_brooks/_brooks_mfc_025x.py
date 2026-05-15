@@ -66,6 +66,7 @@ def parse_response(raw: bytes) -> Response:
         checksum_valid=True,
     )
 
+
 parity_options = {"even": "E", "odd": "O"}
 
 stop_bit_options = {"one": 1, "one_and_half": 1.5, "two": 2}
