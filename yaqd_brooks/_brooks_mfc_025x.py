@@ -66,6 +66,10 @@ def parse_response(raw: bytes) -> Response:
         checksum_valid=True,
     )
 
+parity_options = {"even": "E", "odd": "O"}
+
+stop_bit_options = {"one": 1, "one_and_half": 1.5, "two": 2}
+
 
 class BrooksMfc025x(
     HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesSerial, IsDaemon
@@ -77,8 +81,8 @@ class BrooksMfc025x(
         self._ser = aserial.get_aserial(
             config["serial_port"],  # magically ensures single instance per port
             baudrate=config["baud_rate"],
-            parity=config["parity"],
-            stop_bits=config["stop_bits"],
+            parity=parity_options[config["parity"]],
+            stop_bits=stop_bit_options[config["stop_bits"]],
         )
         self._units = "ml/min"
         self._native_units = "ml/min"
