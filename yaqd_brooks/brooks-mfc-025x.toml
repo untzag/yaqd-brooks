@@ -36,9 +36,9 @@ doc = "Number of stop bits."
 default = "one"
 
 [config.parity]
-type = {"type"="enum", "name"="parity", "symbols"=["O"]}
+type = {"type"="enum", "name"="parity", "symbols"=["even", "odd"]}
 doc = "Serial parity."
-default = "O"
+default = "odd"
 
 [config.calibration]
 type = {"type"="array", "items"="calibration_point"}

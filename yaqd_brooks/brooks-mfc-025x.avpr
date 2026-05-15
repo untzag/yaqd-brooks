@@ -107,12 +107,13 @@
             "type": "enum"
         },
         "parity": {
-            "default": "O",
+            "default": "odd",
             "doc": "Serial parity.",
             "type": {
                 "name": "parity",
                 "symbols": [
-                    "O"
+                    "even",
+                    "odd"
                 ],
                 "type": "enum"
             }
