@@ -19,7 +19,6 @@ from yaqd_core import (
     aserial,
 )
 
-
 parameters = {"SP Rate": 1, "SP Full Scale": 9}
 
 
