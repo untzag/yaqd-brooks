@@ -23,6 +23,9 @@ doc = "Address within RS-232 network. Leave zero for non-networked mode."
 type = "int"
 default = 0
 
+[config.baud_rate]
+default = 9600
+
 [config.physical_port]
 doc = "Physical port used for MFC."
 type = "int"

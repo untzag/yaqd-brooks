@@ -6,6 +6,7 @@
             "type": "int"
         },
         "baud_rate": {
+            "default": 9600,
             "origin": "uses-uart",
             "type": "int"
         },
