@@ -116,8 +116,12 @@
                 "type": "enum"
             }
         },
-        "port": {
+        "physical_port": {
             "doc": "Physical port used for MFC.",
+            "type": "int"
+        },
+        "port": {
+            "doc": "TCP port for daemon to occupy.",
             "origin": "is-daemon",
             "type": "int"
         },

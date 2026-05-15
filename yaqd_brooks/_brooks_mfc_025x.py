@@ -19,6 +19,7 @@ from yaqd_core import (
     aserial,
 )
 
+
 parameters = {"SP Rate": 1, "SP Full Scale": 9}
 
 
@@ -67,9 +68,7 @@ def parse_response(raw: bytes) -> Response:
     )
 
 
-class BrooksMfc025x(
-    HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesSerial, IsDaemon
-):
+class BrooksMfc025x(HasTransformedPosition, HasLimits, HasPosition, UsesUart, UsesSerial, IsDaemon):
     _kind = "brooks-mfc-025x"
 
     def __init__(self, name, config, config_filepath):
@@ -101,7 +100,7 @@ class BrooksMfc025x(
 
     def _set_position(self, position):
         command = construct_write(
-            self._config["address"], self._config["port"], parameters["SP Rate"], position
+            self._config["address"], self._config["physical_port"], parameters["SP Rate"], position
         )
         response = self._ser.awrite_then_readline(command)
 
@@ -113,7 +112,7 @@ class BrooksMfc025x(
     async def update_state(self):
         while True:
             command = construct_query(
-                self._config["address"], self._config["port"], parameters["SP Rate"]
+                self._config["address"], self._config["physical_port"], parameters["SP Rate"]
             )
             raw = self._ser.awrite_then_readline(command)
             response = parse_response(raw)
